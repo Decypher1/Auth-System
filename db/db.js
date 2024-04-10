@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 const CONFIG = require('../config/config');
 
-const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(CONFIG.MongodbURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.log(error);
-        process.exit(1);
-    }
+const connectDB = () => {
+    mongoose.connect(CONFIG.MongodbURI);
+
+    mongoose.connection.on('connected', () => console.log('Connected to DB'));
+
+    mongoose.connection.on('disconnected', () => console.log('Disconnected from DB'));
+
+    mongoose.connection.on('error', (err) => console.log('Error connecting to DB', err));
 }
 module.exports = connectDB;
