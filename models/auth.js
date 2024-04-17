@@ -5,14 +5,25 @@ const Schema = mongoose.Schema;
 //auth schema
 
 const authSchema = new Schema({
-    firstName : {
+    firstname : {
         type : String,
         required: true
     },
 
-    lastName: {
+    lastname: {
         type: String,
         require: true,
+    },
+
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+
+    password: {
+        type: String,
+        required: true
     },
 
     email: {
@@ -21,7 +32,7 @@ const authSchema = new Schema({
     },
     phone: {
         type: Number,
-        required: true,
+        required: false,
         min: [11, 'Must be 11 digits']
     },
 
