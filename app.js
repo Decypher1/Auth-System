@@ -1,6 +1,5 @@
 const express = require('express');
 const CONFIG = require('./config/config');
-const bodyParser = require('body-parser');
 const connectDB = require('./db/db');
 const app = express();
 const authMW = require('./validator/auth.validator')
@@ -8,15 +7,14 @@ const authMW = require('./validator/auth.validator')
 //Connect to DB
 connectDB()
 //Added a middleware
-app.use = express.json();
-// app.use(bodyParser.urlencoded({extended: false}))
-// app.use(bodyParser.json())
+// app.use = express.json();
+
 
 
 //Home page
 
 app.get('/', (req, res) => {
-    res.json({message: 'Welcome to Auth System'})
+    res.send('Welcome to Auth System')
 })
 
 //error handler
